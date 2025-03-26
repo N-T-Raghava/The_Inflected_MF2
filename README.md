@@ -14,7 +14,8 @@ This project extends **MessageFormat2 (MF2)** by integrating **Unicode Inflectio
 This project solves complex grammatical challenges by automating the detection and correction of language-based rules, improving both usability and linguistic accuracy across different languages.
 
 **Structure**
-mf2-inflection/
+```text
+The_Inflected_MF2/
 ├── include/
 │   ├── catch.hpp
 │   ├── dict.h
