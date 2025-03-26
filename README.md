@@ -26,5 +26,5 @@ The_Inflected_MF2/
 │   ├── inflection.cpp
 │   └── mf2.cpp
 ├── tests/
-│   └── test.cpp
+│   └── tests.cpp
 └── CMakeLists.txt
