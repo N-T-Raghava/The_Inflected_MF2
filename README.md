@@ -28,6 +28,6 @@ The_Inflected_MF2/
 ├── tests/  
 │   └── tests.cpp         # Catch2-based unit tests  
 ├── build/  
-│   └── tests             # Executable file for running tests  
+│   └── tests             # Executable file for running tests only in Linux environment
 └── CMakeLists.txt        # Build configuration file  
 
