@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-// ✅ Updated to take only string (automatic inference)
+// Updated to take only string (automatic inference)
 std::string inflectPlural(const std::string& noun);
 std::string inflectGender(const std::string& noun, const std::string& gender);
 std::string formatList(const std::vector<std::string>& items, const std::string& locale = "en");
