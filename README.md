@@ -15,16 +15,19 @@ This project solves complex grammatical challenges by automating the detection a
 
 **Structure**
 ```text
-The_Inflected_MF2/
-├── include/
-│   ├── catch.hpp
-│   ├── dict.h
-│   ├── inflection.h
-│   └── mf2.h
-├── src/
-│   ├── dict.cpp
-│   ├── inflection.cpp
-│   └── mf2.cpp
-├── tests/
-│   └── tests.cpp
-└── CMakeLists.txt
+The_Inflected_MF2/  
+├── include/  
+│   ├── catch.hpp         # Catch2 header for unit testing  
+│   ├── dict.h            # Header for dictionary definitions  
+│   ├── inflection.h      # Header for inflection functions  
+│   └── mf2.h             # Header for MessageFormat2 definitions  
+├── src/  
+│   ├── dict.cpp          # Implementation of dictionary functions  
+│   ├── inflection.cpp    # Implementation of inflection functions  
+│   └── mf2.cpp           # Implementation of MessageFormat2  
+├── tests/  
+│   └── tests.cpp         # Catch2-based unit tests  
+├── build/  
+│   └── tests             # Executable file for running tests  
+└── CMakeLists.txt        # Build configuration file  
+
