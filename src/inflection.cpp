@@ -2,26 +2,39 @@
 #include "../include/dict.h"
 #include <sstream>
 
-// ✅ Handle Irregular Plurals (Detect Count Automatically)
-std::string inflectPlural(const std::string& noun) {
-    auto it = irregularPlurals.find(noun);
+// Handle Irregular Plurals (Detect Count Automatically)
+std::string inflectPlural(const std::string& context) {
+    std::istringstream stream(context);
+    std::string word;
+    int count = 1; // Default count = 1
+
+    stream >> count >> word;
+
+    auto it = irregularPlurals.find(word);
     if (it != irregularPlurals.end()) {
-        return it->second; // Irregular plural case
+        // Irregular plural case
+        return std::to_string(count) + " " + (count > 1 ? it->second : word);
     }
-    if (noun.back() != 's') return noun + "s";
-    return noun;
+
+    // Regular plural case
+    if (count > 1) {
+        if (word.back() != 's') return std::to_string(count) + " " + word + "s";
+    }
+    
+    return std::to_string(count) + " " + word;
 }
 
-// ✅ Handle Gender Inflection
+// Handle Gender Inflection
 std::string inflectGender(const std::string& noun, const std::string& gender) {
-    if (noun == "cat") {
-        if (gender == "male") return "le chat";
-        if (gender == "female") return "la chatte";
+    auto it = genderMap.find(noun);
+    if (it != genderMap.end()) {
+        if (gender == "male") return it->second.first;
+        if (gender == "female") return it->second.second;
     }
-    return noun;
+    return noun; // If no mapping, return the original noun
 }
 
-// ✅ Handle List Formatting
+// Handle List Formatting
 std::string formatList(const std::vector<std::string>& items, const std::string& locale) {
     if (items.empty()) return "";
     if (items.size() == 1) return items[0];
@@ -36,7 +49,7 @@ std::string formatList(const std::vector<std::string>& items, const std::string&
     return result.str();
 }
 
-// ✅ Handle Case Agreement
+// Handle Case Agreement
 std::string inflectCase(const std::string& noun, const std::string& grammaticalCase) {
     auto it = caseForms.find(noun);
     if (it != caseForms.end()) {
@@ -46,7 +59,7 @@ std::string inflectCase(const std::string& noun, const std::string& grammaticalC
     return noun;
 }
 
-// ✅ Handle Adjective Agreement
+// Handle Adjective Agreement
 std::string inflectAdjectiveAgreement(const std::string& adjective, const std::string& noun) {
     auto it = adjectiveAgreement.find(adjective);
     if (it != adjectiveAgreement.end()) return it->second + " " + noun;
