@@ -1,6 +1,7 @@
 #include "../include/inflection.h"
 #include "../include/dict.h"
 #include <sstream>
+#include <algorithm>
 
 // Handle Irregular Plurals (Detect Count Automatically)
 std::string inflectPlural(const std::string& context) {
@@ -34,18 +35,35 @@ std::string inflectGender(const std::string& noun, const std::string& gender) {
     return noun; // If no mapping, return the original noun
 }
 
-// Handle List Formatting
+// Handle Listing
 std::string formatList(const std::vector<std::string>& items, const std::string& locale) {
     if (items.empty()) return "";
-    if (items.size() == 1) return items[0];
-    std::ostringstream result;
-    for (size_t i = 0; i < items.size(); ++i) {
-        if (i > 0) {
-            if (i == items.size() - 1) result << (locale == "en" ? " and " : " y ");
-            else result << ", ";
+
+    std::vector<std::string> nonEmptyItems;
+    for (const auto& item : items) {
+        if (!item.empty()) {
+            nonEmptyItems.push_back(item);
         }
-        result << items[i];
     }
+
+    if (nonEmptyItems.empty()) return "";
+
+    if (nonEmptyItems.size() == 1) {
+        return nonEmptyItems[0];
+    }
+
+    std::ostringstream result;
+    for (size_t i = 0; i < nonEmptyItems.size(); ++i) {
+        if (i > 0) {
+            if (i == nonEmptyItems.size() - 1) {
+                result << (locale == "es" ? " y " : " and ");
+            } else {
+                result << ", ";
+            }
+        }
+        result << nonEmptyItems[i];
+    }
+
     return result.str();
 }
 
