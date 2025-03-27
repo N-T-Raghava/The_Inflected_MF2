@@ -1,16 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(MF2)
+project(TheInflectedMF2)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include header files from 'include' directory
-include_directories(${CMAKE_SOURCE_DIR}/include)
+# Define executable
+add_executable(tests
+    src/mf2.cpp
+    src/dict.cpp
+    src/inflection.cpp    
+    tests/tests.cpp
+)
 
-# Add source files from 'src' directory
-file(GLOB SOURCES "src/*.cpp")
-
-# Add executable for Catch2-based tests
-file(GLOB TEST_SOURCES "tests/*.cpp")
-add_executable(tests ${SOURCES} ${TEST_SOURCES})
-
+# Include directories
+target_include_directories(tests PRIVATE include)
